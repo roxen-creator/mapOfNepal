@@ -57,5 +57,8 @@ typings/
 # dotenv environment variables file
 .env
 
-#macos files
+# macos files
 .DS_Store
+
+# SASS cache folder
+.sass-cache

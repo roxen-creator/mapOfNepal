@@ -3,15 +3,28 @@
   <head>
     <meta charset="utf-8">
     <title>Map of Nepal</title>
+    <link rel="stylesheet" href="css/map-styles.css">
   </head>
   <body>
-    <div id="map-canvas"></div>
+    <div class="map-canvas"></div>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/snap.svg/0.5.1/snap.svg-min.js"></script>
     <script>
-      let s = Snap("#map-canvas");
-      Snap.load("map-files/map-nepal.svg", onSVGLoaded ) ;
+      let s = Snap(".map-canvas");
+      Snap.load("map-files/map-nepal.svg", function(data){
+        s.append(data);
+        //load other elements after the root map is loaded for overlay purposes
 
-      function onSVGLoaded( data ){
+        //add districts
+        Snap.load("map-files/districts.svg", appendOnSVGLoad);
+
+        //add provinces
+        Snap.load("map-files/provinces.svg", appendOnSVGLoad);
+
+        //add nepal boundry outline
+        Snap.load("map-files/nepal-outline.svg", appendOnSVGLoad);
+      });
+
+      function appendOnSVGLoad( data ){
           s.append( data );
       }
     </script>

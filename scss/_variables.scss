@@ -1,0 +1,7 @@
+$province-fill: rgb(84, 141, 247);
+$province-fill-hover: rgba($province-fill,0.45);
+$province-stroke: $province-fill;
+
+$district-fill: rgb(3,3,3);
+$district-fill-hover: rgba($district-fill, 0.25);
+$district-stroke: lighten($district-fill,80);

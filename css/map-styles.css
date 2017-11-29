@@ -1,0 +1,29 @@
+.map-canvas {
+  position: relative; }
+  .map-canvas > svg + svg {
+    position: absolute;
+    top: 0;
+    left: 0;
+    bottom: 0;
+    right: 0; }
+  .map-canvas .map-nepal--outline {
+    pointer-events: none;
+    z-index: 100; }
+    .map-canvas .map-nepal--outline .outline {
+      fill: none !important; }
+  .map-canvas .map-nepal--districts {
+    z-index: 90; }
+    .map-canvas .map-nepal--districts .district {
+      fill: transparent;
+      stroke: #cfcfcf; }
+      .map-canvas .map-nepal--districts .district:hover {
+        fill: rgba(3, 3, 3, 0.25); }
+  .map-canvas .map-nepal--provinces {
+    z-index: 80; }
+    .map-canvas .map-nepal--provinces .province {
+      fill: transparent !important;
+      stroke: #548df7; }
+      .map-canvas .map-nepal--provinces .province:hover {
+        fill: rgba(84, 141, 247, 0.45); }
+
+/*# sourceMappingURL=map-styles.css.map */

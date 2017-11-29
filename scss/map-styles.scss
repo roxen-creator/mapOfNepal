@@ -1,0 +1,43 @@
+@import 'variables';
+
+.map-canvas {
+  position: relative;
+
+  //Positin absolute all other appended svg to stack them in the canvas
+  > svg + svg {
+    position: absolute;
+    top: 0;
+    left: 0;
+    bottom: 0;
+    right: 0;
+  }
+  .map-nepal {
+    &--outline {
+      pointer-events: none;
+      z-index: 100;
+      .outline {
+        fill: none !important;
+      }
+    }
+    &--districts {
+      z-index: 90;
+      .district {
+        fill: transparent;
+        stroke: $district-stroke;
+        &:hover {
+          fill: $district-fill-hover;
+        }
+      }
+    }
+    &--provinces {
+      z-index: 80;
+      .province {
+        fill: transparent !important;
+        stroke: $province-stroke;
+        &:hover {
+          fill: $province-fill-hover;
+        }
+      }
+    }
+  }
+}

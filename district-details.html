@@ -1,0 +1,63 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <meta charset="utf-8" />
+    <title>District Details</title>
+    <style>
+        #svg-container {
+            max-width: 100%;
+            height: auto;
+            display: block;
+            margin: 0 auto;
+        }
+    </style>
+</head>
+
+<body>
+    <h1>District Details</h1>
+
+    <div id="district-info">
+        <!-- District information will be dynamically loaded here -->
+    </div>
+
+    <!-- SVG container -->
+    <div id="svg-container">
+        <!-- SVG will be dynamically loaded here -->
+    </div>
+
+    <script>
+        // Extract district ID from URL parameters
+        const urlParams = new URLSearchParams(window.location.search);
+        const districtId = urlParams.get('district');
+
+        // Display the district ID
+        document.getElementById('district-info').innerHTML = `<p>You selected district: ${districtId}</p>`;
+
+        // Load the entire SVG map
+        fetch("map-files/districts.svg")
+            .then(response => response.text())
+            .then(svgData => {
+                // Create a new SVG element
+                const parser = new DOMParser();
+                const svgDoc = parser.parseFromString(svgData, "image/svg+xml");
+                const svgElement = svgDoc.documentElement;
+
+                // Hide all elements except the selected district
+                const allElements = svgElement.querySelectorAll('*');
+                allElements.forEach(element => {
+                    if (element.id !== districtId) {
+                        element.style.display = 'none';
+                    }
+                });
+
+                // Append the modified SVG to the container
+                document.getElementById('svg-container').appendChild(svgElement);
+            })
+            .catch(error => {
+                console.error('Error loading SVG:', error);
+            });
+    </script>
+</body>
+
+</html>

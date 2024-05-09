@@ -1,32 +1,51 @@
 <!DOCTYPE html>
 <html>
-  <head>
-    <meta charset="utf-8">
-    <title>Map of Nepal</title>
-    <link rel="stylesheet" href="css/map-styles.css">
-  </head>
-  <body>
-    <div class="map-canvas"></div>
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/snap.svg/0.5.1/snap.svg-min.js"></script>
-    <script>
-      let s = Snap(".map-canvas");
-      Snap.load("map-files/map-nepal.svg", function(data){
-        s.append(data);
-        //load other elements after the root map is loaded for overlay purposes
 
-        //add districts
-        Snap.load("map-files/districts.svg", appendOnSVGLoad);
+<head>
+  <meta charset="utf-8" />
+  <title>Map of Nepal</title>
+  <link rel="stylesheet" href="css/map-styles.css" />
+</head>
 
-        //add provinces
-        Snap.load("map-files/provinces.svg", appendOnSVGLoad);
+<body>
+  <div class="map-canvas"></div>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/snap.svg/0.5.1/snap.svg-min.js"></script>
+  <script>
+    let s = Snap(".map-canvas");
 
-        //add nepal boundry outline
-        Snap.load("map-files/nepal-outline.svg", appendOnSVGLoad);
+    // Function to handle click event on a district
+    function districtClickHandler() {
+      // Perform actions you want when a district is clicked
+      let districtId = this.attr("id");
+      window.open("district-details.html?district=" + districtId, "_blank");
+    }
+
+    // Function to append SVG data and attach event listeners
+    function appendOnSVGLoad(data) {
+      s.append(data);
+
+      // Attach event listeners to each district element
+      s.selectAll(".district").forEach(function (district) {
+        district.click(districtClickHandler);
       });
+    }
 
-      function appendOnSVGLoad( data ){
-          s.append( data );
-      }
-    </script>
-  </body>
+    // Load the map and other elements
+    Snap.load("map-files/map-nepal.svg", function (data) {
+      s.append(data);
+
+      // Load other elements after the root map is loaded for overlay purposes
+
+      // Add districts
+      Snap.load("map-files/districts.svg", appendOnSVGLoad);
+
+      // Add provinces
+      Snap.load("map-files/provinces.svg", appendOnSVGLoad);
+
+      // Add Nepal boundary outline
+      Snap.load("map-files/nepal-outline.svg", appendOnSVGLoad);
+    });
+  </script>
+</body>
+
 </html>
